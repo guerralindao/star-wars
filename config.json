@@ -1,0 +1,17 @@
+{
+    "websites": {
+        "starwars": {
+            "priority": 10,
+            "author": "Guerra, Mauro",
+            "created": "19/05/2024",
+            "updated": "19/05/2024",
+            "website": "Card Game site",
+            "description": "Recover all cards and setup an vision OCI recognition",
+            "url": "https://admin.starwarsunlimited.com",
+            "url_base": "https://admin.starwarsunlimited.com",
+            "url_api": "https://admin.starwarsunlimited.com/api",
+            "number_of_elements": 50,
+            "status": "ENABLED"
+        }
+    }
+}
