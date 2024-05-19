@@ -1,0 +1,28 @@
+# Environment path
+.venv/*
+.venv
+.env/*
+.env
+.env/*
+.venv/*
+.venv-node/*
+
+# Backup files
+*.backup
+backup/*
+backup
+
+# Test files
+*.test
+test/*
+test.*
+
+# Python
+__pycache__/*
+__pycache__/
+_pycache_
+__pycache__
+
+# Drivers
+drivers/*
+drivers
