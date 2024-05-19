@@ -67,3 +67,16 @@ This it will give you all cards (649 ?)
 
 https://admin.starwarsunlimited.com/api/cards?locale=it&pagination[page]=1&pagination[pageSize]=20
 
+## Scrape data from website
+
+I'll use the following json section to make an automation that scrape all data
+
+```json
+  "meta": {
+    "pagination": {
+      "page": 1,
+      "pageSize": 20,
+      "pageCount": 33,
+      "total": 649
+    }
+```
