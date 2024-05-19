@@ -1,0 +1,7 @@
+beautifulsoup4
+bs4
+matplotlib
+mysql-connector
+python-dotenv
+requests
+requests-html
