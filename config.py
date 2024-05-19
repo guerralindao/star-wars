@@ -15,6 +15,7 @@ from dotenv import load_dotenv # using for environment
 
 # Set current work path
 CURRENT_DIRECTORY = os.getcwd() # Set current path
+CONFIG_FILE = f"{CURRENT_DIRECTORY}/config.json" # Set configuration file
 
 # Load environment variables
 # load_dotenv(f"{CURRENT_DIRECTORY}/.env")
@@ -67,4 +68,41 @@ def create_data_storage(data, name, mode):
         df.to_csv(f"parsed/{storage_name}.csv", mode=f"{storage_mode}", index=False, header=False, sep=";", encoding="utf-8")  # Optional: Don't include index column
     else:
         print("Storage not configured. It miss format")
+
+# Load config data from json file
+def load_data_config():
+    # Load the JSON data
+    with open(CONFIG_FILE, "r") as file:
+        data = json.load(file)
+    # Return data
+    return data
+
+# Get object from data configuration 
+def get_data_config(data, key):
+    #
+    # This function checks if an object exists in a nested JSON 
+    # and returns the entire object with its keys and values.
+    # 
+    # Args:
+    #   data: The JSON data structure (dictionary).
+    #   key: The key of the object to search for.
+    # Returns:
+    #   The entire object associated with the key if found, None otherwise.
+
+    if not isinstance(data, dict):
+        return None  # Not a dictionary, can't search for keys
+
+    # Check if the key exists at the top level
+    if key in data:
+        return data[key]
+
+    # Recursively search for the key in nested dictionaries
+    for inner_key, inner_value in data.items():
+        if isinstance(inner_value, dict):
+            result = get_data_config(inner_value, key)
+            # Get result data if the object is not DISABLED (see json configuration file)
+            if result is not None and result["status"]!="DISABLED":
+                return result # Key found
+
+    return None  # Key not found
 
