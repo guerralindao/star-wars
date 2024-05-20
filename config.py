@@ -107,6 +107,20 @@ def get_data_config(data, key):
 
     return None  # Key not found
 
+""" Clean response, move response to backup """
+def clean(base_path, response_id):
+
+    # Define the source and destination paths
+    source = f"{base_path}/{response_id}"
+    destination = f"{base_path}/backups/{response_id}.backup"
+
+    # Move the file and print the new location
+    dest = shutil.move(source, destination)
+
+    # Print feedback
+    print(f"{TRASMISSIONE}: The file is moved to", dest)
+
+
 ###############
 # Dictonaries #
 ###############
