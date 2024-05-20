@@ -8,6 +8,7 @@ from config import * # Configuration file
 # Libraries / Markets
 ##############################
 from components.starwars import main as starwars # Libreria starwars scraping
+from components.images_download import main as _download # Libreria download images
 
 ##############################
 # Code functions
@@ -18,6 +19,9 @@ def main():
     print("=====================")
     print("= RUNNING FUNCTIONS =")
     print("=====================")
+    starwars() # Start scrape data from website
+    _download() # Start downloading images from website
+
     print()
 
 
