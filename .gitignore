@@ -29,3 +29,8 @@ drivers
 
 # Scripts
 *.sh
+
+# Images
+*.png
+*.jpeg
+*.jpg
