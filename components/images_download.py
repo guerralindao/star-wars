@@ -47,7 +47,7 @@ def main():
             # Debug: Print file name
             result = getting_images(csv_file_name) # Elaborate file
             download_image(result) # Download images (front)
-            # clean("assets", csv_file_name) # Cleaner
+            clean("assets", csv_file_name) # Cleaner
 
     else:
         # Website running disable 
