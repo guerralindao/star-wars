@@ -9,6 +9,7 @@ from config import * # Configuration file
 ##############################
 from components.starwars import main as starwars # Libreria starwars scraping
 from components.images_download import main as _download # Libreria download images
+from components.images_compare import main as _compare # Libreria comparing images
 
 ##############################
 # Code functions
