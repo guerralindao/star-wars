@@ -34,3 +34,6 @@ drivers
 *.png
 *.jpeg
 *.jpg
+
+# Metadata
+metadata*
