@@ -66,7 +66,7 @@ def create_data_storage(data, name, mode):
     # Check format (see on configuration file)
     if LOGGING_MODE == "CSV":
         df = pd.DataFrame(storage_data)
-        df.to_csv(f"parsed/{storage_name}.csv", mode=f"{storage_mode}", index=False, header=False, sep=";", encoding="utf-8")  # Optional: Don't include index column
+        df.to_csv(f"assets/{storage_name}.csv", mode=f"{storage_mode}", index=False, header=False, sep=";", encoding="utf-8")  # Optional: Don't include index column
     else:
         print("Storage not configured. It miss format")
 
