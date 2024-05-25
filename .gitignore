@@ -37,3 +37,12 @@ drivers
 
 # Metadata
 metadata*
+
+# System
+.system/
+.system
+.env_system
+.envsystem/
+system
+system/
+
