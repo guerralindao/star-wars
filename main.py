@@ -5,26 +5,31 @@
 from config import * # Configuration file
 
 ##############################
-# Libraries / Markets
+# Libraries
 ##############################
-from components.starwars import main as starwars # Libreria starwars scraping
-from components.images_download import main as _download # Libreria download images
-from components.images_compare import main as _compare # Libreria comparing images
+from components.starwars import main as starwars # Library starwars scraping
+from components.images_download import main as _download # Library download images
+from components.images_compare import main as _compare # Library comparing images
+from system.telegram_sendmessage import main as _alert # Library alert administrator [SYSTEM]
 
 ##############################
 # Code functions
 ##############################
 def main():
 
-    print() # Starting
-    print("=====================")
-    print("= RUNNING FUNCTIONS =")
-    print("=====================")
+    print() # Start
+    print("===========================")
+    print("= START RUNNING FUNCTIONS =")
+    print("===========================")
+    
     starwars() # Start scrape data from website
     _download() # Start downloading images from website
+    _alert() # Start send notification to administrator
 
-    print()
-
+    print() # Finish
+    print("============================")
+    print("= FINISH RUNNING FUNCTIONS =")
+    print("============================")
 
 ##############################
 # Code execution
