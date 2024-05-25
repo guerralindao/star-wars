@@ -16,6 +16,7 @@ backup
 *.test
 test/*
 test.*
+*test*
 
 # Python
 __pycache__/*
