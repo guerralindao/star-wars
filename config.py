@@ -15,8 +15,10 @@ from multiprocessing import Process # Multiprocess
 from dotenv import load_dotenv # using for environment
 
 # Set current work path
-CURRENT_DIRECTORY = os.getcwd() # Set current path
+# CURRENT_DIRECTORY = os.getcwd() # Set current path
+CURRENT_DIRECTORY = "/app/starwars" # Set current path
 CONFIG_FILE = f"{CURRENT_DIRECTORY}/config.json" # Set configuration file
+# CONFIG_FILE = f"/app/starwars/config.json" # Set configuration file
 
 # Load environment variables
 # load_dotenv(f"{CURRENT_DIRECTORY}/.env")
