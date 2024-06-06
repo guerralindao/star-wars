@@ -51,7 +51,7 @@ def main():
         # Check if the response is not None
         if response is not None:
             # Setting json responses path
-            path_to_json_files = 'lobster/'
+            path_to_json_files = f"{CURRENT_DIRECTORY}/lobster/"
 
             # Get all JSON file names as a list
             json_file_names = [filename for filename in os.listdir(path_to_json_files) if filename.endswith('.json')]
@@ -76,7 +76,7 @@ def main():
 def payload_response(response_id):
     # Open and read response json format
     # I'm not declare file extension because it will be pass from directory list 
-    with open(f'lobster/{response_id}', 'r') as file:
+    with open(f'{CURRENT_DIRECTORY}/lobster/{response_id}', 'r') as file:
         data = json.load(file)
     # Return response data
     return data

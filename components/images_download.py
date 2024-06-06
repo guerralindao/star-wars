@@ -37,7 +37,7 @@ def main():
     if data_object is not None:
         
         # Setting json responses path
-        path_to_json_files = 'assets/'
+        path_to_json_files = f'{CURRENT_DIRECTORY}/assets/'
 
         # Get all CSV file names as a list
         csv_file_names = [filename for filename in os.listdir(path_to_json_files) if filename.endswith('.csv')]
@@ -62,7 +62,7 @@ def main():
 def getting_images(file):
 
     # Get data from file CSV
-    data = pd.read_csv(f"assets/{file}", header=None, sep=";", encoding="utf-8")
+    data = pd.read_csv(f"{CURRENT_DIRECTORY}/assets/{file}", header=None, sep=";", encoding="utf-8")
 
     # Get result from data and convert to list
     result = data[11].tolist()
@@ -93,7 +93,7 @@ def download_image(result):
         response = requests.get(i)
 
         # Save response to image
-        with open(f"assets/images/{name_image}", 'wb') as file:
+        with open(f"{CURRENT_DIRECTORY}/assets/images/{name_image}", 'wb') as file:
             file.write(response.content)
         
         
