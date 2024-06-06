@@ -96,8 +96,11 @@ def getting_data_from_website():
     # Initializing variables
     data = None
     page_number = 1
-    my_request = f"{WEBSITE_URL_API}/cards?locale=it&pagination[page]={page_number}&pagination[pageSize]={WEBSITE_ELEMENTS_NUMBER}"
     response_name = f"response_{TRASMISSIONE}"
+    
+    # Change request from IT to ENG
+    # my_request = f"{WEBSITE_URL_API}/cards?locale=it&pagination[page]={page_number}&pagination[pageSize]={WEBSITE_ELEMENTS_NUMBER}"
+    my_request = f"{WEBSITE_URL_API}/cards?pagination[page]={page_number}&pagination[pageSize]={WEBSITE_ELEMENTS_NUMBER}"
 
     # Send the request
     response = requests.get(my_request)
@@ -191,7 +194,10 @@ def parsing_data_from_response(response_id):
         data_attributes_life = dataset["hp"] if dataset["hp"] is not None else "ND"
         data_attributes_power = dataset["power"] if dataset["power"] is not None else "ND"
         data_attributes_text = dataset["text"] if dataset["text"] is not None else "ND"
-        
+        # More informations about card
+        data_attributes_uid = dataset["cardUid"] if dataset["cardUid"] is not None else "ND"
+        data_attributes_epicaction = dataset["epicAction"] if dataset["epicAction"] is not None else "ND"
+
         # Get Front image 
         data_image_front = dataset["artFront"]["data"]["attributes"]["url"]
         
@@ -220,6 +226,10 @@ def parsing_data_from_response(response_id):
         *   Aspects (it would be a loop) 
         ************************************* 
         """ 
+        # Empty boxes
+        box_data_aspects_name = ""
+        box_data_aspects_description = ""
+        box_data_aspects_color = ""
         if is_empty_json(dataset["aspects"]["data"]) is False:
             
             # Initialize variables
@@ -234,6 +244,11 @@ def parsing_data_from_response(response_id):
                 data_aspects_description = dataset["aspects"]["data"][my_index]["attributes"]["description"] if dataset["aspects"]["data"][my_index]["attributes"]["description"] is not None else "ND"
                 data_aspects_color = dataset["aspects"]["data"][my_index]["attributes"]["color"] if dataset["aspects"]["data"][my_index]["attributes"]["color"] is not None else "ND"
                 
+                # Compile boxes with array informations
+                box_data_aspects_name += f"{data_aspects_name}, "
+                box_data_aspects_description += f"{data_aspects_description}, "
+                box_data_aspects_color += f"{data_aspects_color}, "
+
                 # Continue loop
                 my_index = my_index + 1
 
@@ -252,6 +267,9 @@ def parsing_data_from_response(response_id):
         *   Traits (it would be a loop)
         ************************************* 
         """ 
+        # Empty boxes
+        box_data_traits_name = ""
+        box_data_traits_description = ""
         if is_empty_json(dataset["traits"]["data"]) is False:
 
             # Initialize variables
@@ -264,7 +282,11 @@ def parsing_data_from_response(response_id):
                 # Get informations
                 data_traits_name = dataset["traits"]["data"][my_index]["attributes"]["name"] if dataset["traits"]["data"][my_index]["attributes"]["name"] is not None else "ND"
                 data_traits_description = dataset["traits"]["data"][my_index]["attributes"]["description"] if dataset["traits"]["data"][my_index]["attributes"]["description"] is not None else "ND"
-                
+
+                # Compile boxes with array informations
+                box_data_traits_name += f"{data_traits_name}, "
+                box_data_traits_description += f"{data_traits_description}, "
+
                 # Continue loop
                 my_index = my_index + 1
 
@@ -273,6 +295,9 @@ def parsing_data_from_response(response_id):
         *   Arenas (it would be a loop)
         ************************************* 
         """ 
+        # Empty boxes
+        box_data_arenas_name = ""
+        box_data_arenas_description = ""
         if is_empty_json(dataset["arenas"]["data"]) is False:
 
             # Initialize variables
@@ -281,10 +306,15 @@ def parsing_data_from_response(response_id):
             
             # Start loop
             while my_index < max_index: 
+                
                 # Get informations
                 data_arenas_name = dataset["arenas"]["data"][my_index]["attributes"]["name"] if dataset["arenas"]["data"][my_index]["attributes"]["name"] is not None else "ND"
                 data_arenas_description = dataset["arenas"]["data"][my_index]["attributes"]["description"] if dataset["arenas"]["data"][my_index]["attributes"]["description"] is not None else "ND"
-                
+
+                # Compile boxes with array informations
+                box_data_arenas_name += f"{data_arenas_name}, "
+                box_data_arenas_description += f"{data_arenas_description}, "
+
                 # Continue loop
                 my_index = my_index + 1
 
@@ -337,12 +367,20 @@ def parsing_data_from_response(response_id):
         # print(f"Espansione codice : {data_expansion_code}")
         # print()
 
-        # Clean TEXT variable
-        # Removing html tags, examples: <h1><br />...
+        # Caracthers to cleaner
         to_clean = re.compile("<.*?>")
+        
+        # Removing html tags, examples: <h1><br />...
         data_attributes_text = re.sub(to_clean, "", data_attributes_text)
+        box_data_aspects_description = re.sub(to_clean, "", box_data_aspects_description)
+        box_data_traits_description = re.sub(to_clean, "", box_data_traits_description)
+        box_data_arenas_description = re.sub(to_clean, "", box_data_arenas_description)
+        
         # Removing line breaks
         data_attributes_text = re.sub("\n|\r", " ", data_attributes_text)
+        box_data_aspects_description = re.sub("\n|\r", " ", box_data_aspects_description)
+        box_data_traits_description = re.sub("\n|\r", " ", box_data_traits_description)
+        box_data_arenas_description = re.sub("\n|\r", " ", box_data_arenas_description)
 
         # Append on my list my information
         list_data.append({
@@ -359,12 +397,19 @@ def parsing_data_from_response(response_id):
             "text": data_attributes_text, # Text effect
             "image_front": data_image_front, # Image front
             "image_back": data_image_back, # Image back
-            "aspect": None, # [ARRAY]
+            "card_uid": data_attributes_uid, # Uid card
+            "epic_action": data_attributes_epicaction, # Epic action
+            "variants": "XXX",
+            "aspect_name": box_data_aspects_name, # [ARRAY]
+            "aspect_description": box_data_aspects_description, # [ARRAY]
+            "aspect_color": box_data_aspects_color, # [ARRAY]
             "type_name": data_type_name, # Type name 
             "type_description": data_type_description, # Type description
             "type_value": data_type_value, # Type value
-            "traits": None, # [ARRAY]
-            "arenas": None, # [ARRAY]
+            "traits_name": box_data_traits_name, # [ARRAY]
+            "traits_description": box_data_traits_description, # [ARRAY]
+            "arenas_name": box_data_arenas_name, # [ARRAY]
+            "arenas_description": box_data_arenas_description, # [ARRAY]
             "rarity_name": data_rarity_name, # Rarity name
             "rarity_character": data_rarity_character, # Rarity character
             "expansion_name": data_expansion_name, # Expansion name
