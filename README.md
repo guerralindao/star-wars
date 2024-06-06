@@ -70,7 +70,11 @@ You can find some soluction that you can see on the following points
 2. Manual commands
 
 ### Automation script
-*WORK IN PROGRESS*
+You need to run the following command to setup directories and so on (this script works on Linux OS).
+
+```bash
+$ python3 setup.py
+```
 
 ### Manual commands
 You need to be in the root project to run this commands
