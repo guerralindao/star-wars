@@ -68,7 +68,7 @@ def create_data_storage(data, name, mode):
     # Check format (see on configuration file)
     if LOGGING_MODE == "CSV":
         df = pd.DataFrame(storage_data)
-        df.to_csv(f"assets/{storage_name}.csv", mode=f"{storage_mode}", index=False, header=False, sep=";", encoding="utf-8")  # Optional: Don't include index column
+        df.to_csv(f"{CURRENT_DIRECTORY}/assets/{storage_name}.csv", mode=f"{storage_mode}", index=False, header=False, sep=";", encoding="utf-8")  # Optional: Don't include index column
     else:
         print("Storage not configured. It miss format")
 
@@ -113,8 +113,8 @@ def get_data_config(data, key):
 def clean(base_path, response_id):
 
     # Define the source and destination paths
-    source = f"{base_path}/{response_id}"
-    destination = f"{base_path}/backups/{response_id}.backup"
+    source = f"{CURRENT_DIRECTORY}/{base_path}/{response_id}"
+    destination = f"{CURRENT_DIRECTORY}/{base_path}/backups/{response_id}.backup"
 
     # Move the file and print the new location
     dest = shutil.move(source, destination)
