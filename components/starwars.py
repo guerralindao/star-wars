@@ -135,7 +135,7 @@ def getting_data_from_website():
             data = json.loads(response.content.decode('utf-8'))
 
             # Save response on file.json
-            with open(f'lobster/{response_id}.json', 'w') as file:
+            with open(f'{CURRENT_DIRECTORY}/lobster/{response_id}.json', 'w') as file:
                 json.dump(data, file)
 
             # Print feedback
