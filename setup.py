@@ -13,6 +13,7 @@ lobster = "lobster" # Lobster directory : there are temporally files and backups
 assets = "assets" # Assets directory : there are images, parsed files and backups
 subdir_backups = "backups" # Backups directory
 subdir_images = "images" # Images directory
+subdir_uploads = "uploads" # Images uploads directory
 
 # Make MAIN directories to setup project
 os.system(f"mkdir -p {lobster}")
@@ -24,6 +25,7 @@ os.system(f"mkdir -p {assets}/{subdir_backups}")
 
 # Make IMAGES directory
 os.system(f"mkdir -p {assets}/{subdir_images}")
+os.system(f"mkdir -p {assets}/{subdir_uploads}")
 
 # Finish
 print(f"{timestamp}: Setup finished")
