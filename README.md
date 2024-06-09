@@ -41,7 +41,7 @@ python3 -m venv your/path/venv
 You must activate virtual environment if you want to run the project 
 
 ```bash
-source your/path/venv/activate
+source your/path/venv/bin/activate
 ```
 
 To deactivate virtual environment you need to prompt the following string on your terminal
@@ -67,7 +67,7 @@ pip install -r requirements.txt
 You can find some soluction that you can see on the following points
 
 1. Automation script
-2. Manual commands
+2. Manual commands **_( Deleted )_**
 
 ### Automation script
 You need to run the following command to setup directories and so on (this script works on Linux OS).
@@ -76,22 +76,11 @@ You need to run the following command to setup directories and so on (this scrip
 $ python3 setup.py
 ```
 
-### Manual commands
-You need to be in the root project to run this commands
-
-```bash
-$ mkdir assets
-$ mkdir assets/backups
-$ mkdir assets/images
-$ mkdir lobster
-$ mkdir lobster/backups
-```
-
 **Lobster folder**
 > Folder where you can find every response scrape from script
 
 **Assets folder**
-> Folder where you can find images downloaded and responses parsed from scraping
+> Folder where you can find images downloaded and responses parsed from scraping, and so on
 
 ## Run main project file
 You can find some soluction that you can see on the following points, but first you need comment the following lines on main.py
