@@ -13,6 +13,9 @@ import datetime # using datetime module
 from bs4 import BeautifulSoup # using for scrape websites
 from multiprocessing import Process # Multiprocess
 from dotenv import load_dotenv # using for environment
+import telegram # using for telegram bot
+from telegram.ext import * # using for telegram bot
+
 
 # Set current work path
 # CURRENT_DIRECTORY = os.getcwd() # Set current path
@@ -21,7 +24,7 @@ CONFIG_FILE = f"{CURRENT_DIRECTORY}/config.json" # Set configuration file
 # CONFIG_FILE = f"/app/starwars/config.json" # Set configuration file
 
 # Load environment variables
-# load_dotenv(f"{CURRENT_DIRECTORY}/.env")
+load_dotenv(f"{CURRENT_DIRECTORY}/.env")
 
 ##############################
 # Parameters
