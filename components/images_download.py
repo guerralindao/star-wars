@@ -42,12 +42,16 @@ def main():
         # Get all CSV file names as a list
         csv_file_names = [filename for filename in os.listdir(path_to_json_files) if filename.endswith('.csv')]
 
-        # Loop every CSV file
-        for csv_file_name in csv_file_names:
-            # Debug: Print file name
-            result = getting_images(csv_file_name) # Elaborate file
-            download_image(result) # Download images (front)
-            clean("assets", csv_file_name) # Cleaner
+        # Checking if list is not empty
+        if csv_file_names:
+            # Loop every CSV file
+            for csv_file_name in csv_file_names:
+                # Debug: Print file name
+                result = getting_images(csv_file_name) # Elaborate file
+                download_image(result) # Download images (front)
+                clean("assets", csv_file_name) # Cleaner
+        else:
+            print(f"{TRASMISSIONE}: List filename images empty")
 
     else:
         # Website running disable 
@@ -81,10 +85,8 @@ def download_image(result):
     # Download images (i = url image)
     for i in result:
         # Setting name file
-        name_image = i
-        name_image = name_image.replace("https://cdn.starwarsunlimited.com//", "") 
-        name_image = name_image.replace("https://cdn.starwarsunlimited.com/", "") 
-        name_image = name_image.replace("/", "")
+        # Implementation: Get last item of splitted string (filename)
+        name_image = i.split("/")[-1]
         
         # Print feedback
         print(f"{TRASMISSIONE}: Download image [{name_image}] ...")
