@@ -178,8 +178,6 @@ def parsing_data_from_response(response_id):
         #   EROE = True
         #   TRUPPA = False
         #   EVENTO = False 
-        data_attributes_artFrontHorizontal = dataset["artFrontHorizontal"]
-        data_attributes_artBackHorizontal = dataset["artBackHorizontal"]
         
         ######################
         # Get data from JSON #
@@ -201,9 +199,9 @@ def parsing_data_from_response(response_id):
         # Get Front image 
         data_image_front = dataset["artFront"]["data"]["attributes"]["url"]
         
-        # Get Back image
+        # Get Back image: Add check empty array
         data_image_back = ""
-        if data_attributes_artBackHorizontal is not None:
+        if is_empty_json(dataset["artBack"]["data"]) is False:
             data_image_back = dataset["artBack"]["data"]["attributes"]["url"]
         
         #######################
