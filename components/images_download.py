@@ -46,7 +46,6 @@ def main():
         if csv_file_names:
             # Loop every CSV file
             for csv_file_name in csv_file_names:
-                # Debug: Print file name
                 result = getting_images(csv_file_name) # Elaborate file
                 download_image(result) # Download images (front)
                 clean("assets", csv_file_name) # Cleaner
@@ -69,7 +68,15 @@ def getting_images(file):
     data = pd.read_csv(f"{CURRENT_DIRECTORY}/assets/{file}", header=None, sep=";", encoding="utf-8")
 
     # Get result from data and convert to list
-    result = data[11].tolist()
+    result_img_front = data[11].tolist() # Front images [11]
+    result_img_back = data[12].tolist() # Back images [12]
+
+    # Removing empty values / "nan" values
+    result_img_front = [i for i in result_img_front if str(i) != 'nan']
+    result_img_back = [i for i in result_img_back if str(i) != 'nan']
+
+    # Create a single list
+    result = result_img_front + result_img_back
 
     # Return result
     return result
@@ -80,6 +87,7 @@ def download_image(result):
 
     # Initializing variables
     data = None
+    counter = 0
 
     # Loop all informations
     # Download images (i = url image)
@@ -91,14 +99,21 @@ def download_image(result):
         # Print feedback
         print(f"{TRASMISSIONE}: Download image [{name_image}] ...")
         
+        # Compile counter images downloaded
+        counter = counter + 1
+
         # Obtain response
         response = requests.get(i)
 
         # Save response to image
         with open(f"{CURRENT_DIRECTORY}/assets/images/{name_image}", 'wb') as file:
-            file.write(response.content)
-        
-        
+            file.write(response.content)        
+        # End loop
+
+    # Print feedback about numbers of images
+    print(f"{TRASMISSIONE}: [{counter}] images downloaded")
+
+
 
 
 
