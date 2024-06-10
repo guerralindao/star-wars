@@ -196,9 +196,11 @@ def parsing_data_from_response(response_id):
         data_attributes_uid = dataset["cardUid"] if dataset["cardUid"] is not None else "ND"
         data_attributes_epicaction = dataset["epicAction"] if dataset["epicAction"] is not None else "ND"
 
-        # Get Front image 
-        data_image_front = dataset["artFront"]["data"]["attributes"]["url"]
-        
+        # Get Front image: Add check empty array
+        data_image_front = ""
+        if is_empty_json(dataset["artFront"]["data"]) is False:
+            data_image_front = dataset["artFront"]["data"]["attributes"]["url"]
+
         # Get Back image: Add check empty array
         data_image_back = ""
         if is_empty_json(dataset["artBack"]["data"]) is False:
