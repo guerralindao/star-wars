@@ -192,9 +192,14 @@ def parsing_data_from_response(response_id):
         data_attributes_life = dataset["hp"] if dataset["hp"] is not None else "ND"
         data_attributes_power = dataset["power"] if dataset["power"] is not None else "ND"
         data_attributes_text = dataset["text"] if dataset["text"] is not None else "ND"
+        
         # More informations about card
+        # Remove break lines - Use a space ' ' to replace `\n`
+        # New dataset card, attributes break line and epicaction
         data_attributes_uid = dataset["cardUid"] if dataset["cardUid"] is not None else "ND"
         data_attributes_epicaction = dataset["epicAction"] if dataset["epicAction"] is not None else "ND"
+        data_attributes_uid = data_attributes_uid.replace('\n', ' ').replace('\r', '') # Remove break line
+        data_attributes_epicaction = data_attributes_epicaction.replace('\n', ' ').replace('\r', '') # Remove break line
 
         # Get Front image: Add check empty array
         data_image_front = ""
