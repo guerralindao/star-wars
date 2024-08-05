@@ -32,9 +32,9 @@ drivers
 *.sh
 
 # Images
-*.png
-*.jpeg
-*.jpg
+# *.png
+# *.jpeg
+# *.jpg
 
 # Metadata
 metadata*
